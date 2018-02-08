@@ -19,8 +19,10 @@ public class Produto implements Serializable{
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "categoria_id")
-    private String categoria_id;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
 
     public Long getId() {
         return id;
@@ -46,11 +48,11 @@ public class Produto implements Serializable{
         this.descricao = descricao;
     }
 
-    public String getCategoria_id() {
-        return categoria_id;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setCategoria_id(String categoria_id) {
-        this.categoria_id = categoria_id;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

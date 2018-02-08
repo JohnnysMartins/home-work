@@ -28,4 +28,10 @@ public class ProdutoController {
         return repository.findOne(id);
     }
 
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void saveProduto(@RequestBody Produto produto){
+        repository.save(produto);
+    }
+
 }
