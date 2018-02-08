@@ -34,4 +34,9 @@ public class ProdutoController {
         repository.save(produto);
     }
 
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void removeProduto(@PathVariable("id") Long id){
+        repository.delete(id);
+    }
 }
