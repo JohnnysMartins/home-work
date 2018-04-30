@@ -14,8 +14,8 @@ public class Categoria  implements Serializable{
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome")
-    private String nome;
+    @Column(name = "descricao")
+    private String descricao;
 
     public Long getId() {
         return id;
@@ -26,10 +26,10 @@ public class Categoria  implements Serializable{
     }
 
     public String getNome() {
-        return nome;
+        return descricao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String descricao) {
+        this.descricao = descricao;
     }
 }
