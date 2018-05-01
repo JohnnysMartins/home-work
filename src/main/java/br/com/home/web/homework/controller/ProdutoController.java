@@ -1,7 +1,9 @@
 package br.com.home.web.homework.controller;
 
 
+import br.com.home.web.homework.domain.Categoria;
 import br.com.home.web.homework.domain.Produto;
+import br.com.home.web.homework.repository.CategoriaRepository;
 import br.com.home.web.homework.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,29 +16,34 @@ import java.util.List;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoRepository repository;
+    private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public List<Produto> getAllProdutos(){
-        return repository.findAll();
+    public List<Produto> getAllProdutos() {
+        return produtoRepository.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-            @ResponseStatus(HttpStatus.OK)
-            public Produto getProduto(@PathVariable("id") Long id){
-            return repository.findOne(id);
-            }
-
-            @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void saveProduto(@RequestBody Produto produto){
-        repository.save(produto);
+    public Produto getProduto(@PathVariable("id") Long id) {
+        return produtoRepository.findOne(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void saveProduto(@RequestBody Produto produto, @PathVariable("id") Long id) {
+        Categoria categoria = categoriaRepository.findOne(id);
+        produto.setCategoria(categoria);
+        produtoRepository.save(produto);
     }
 
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void removeProduto(@PathVariable("id") Long id){
-        repository.delete(id);
+    public void removeProduto(@PathVariable("id") Long id) {
+        produtoRepository.delete(id);
     }
 }
