@@ -21,7 +21,7 @@ public class ProdutoController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Produto> getAllProdutos() {
         return produtoRepository.findAll();
@@ -41,7 +41,7 @@ public class ProdutoController {
         produtoRepository.save(produto);
     }
 
-    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public void removeProduto(@PathVariable("id") Long id) {
         produtoRepository.delete(id);

@@ -10,7 +10,8 @@ public class Produto implements Serializable{
     private static final long serialVersionUID = -6666192453307283421L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY, generator = "produto_id_seq")
+    @SequenceGenerator(name = "produto_id_seq", sequenceName = "produto_id_seq")
     @Column(name = "id")
     private Long id;
 
@@ -19,6 +20,18 @@ public class Produto implements Serializable{
 
     @Column
     private String descricao;
+
+    @Column
+    private String codigo;
+
+    @Column(name = "preco_custo")
+    private Double precoCusto;
+
+    @Column(name = "preco_venda")
+    private Double precoVenda;
+
+    @Column
+    private int quantidade;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "categoria_id")
@@ -54,5 +67,37 @@ public class Produto implements Serializable{
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public Double getPrecoCusto() {
+        return precoCusto;
+    }
+
+    public void setPrecoCusto(Double precoCusto) {
+        this.precoCusto = precoCusto;
+    }
+
+    public Double getPrecoVenda() {
+        return precoVenda;
+    }
+
+    public void setPrecoVenda(Double precoVenda) {
+        this.precoVenda = precoVenda;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 }
